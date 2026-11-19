@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CMC Signal Board — live crypto market signals, explained</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <div class="brand">
+    <h1>📊 CMC Signal Board</h1>
+    <p class="tagline">Live crypto market signals from the CoinMarketCap Pro API — scored, and explained in plain language.</p>
+  </div>
+  <div class="mode-box">
+    <span id="mode-badge" class="badge">loading…</span>
+    <button id="refresh" type="button">↻ Refresh</button>
+  </div>
+</header>
+
+<div id="sample-banner" class="sample-banner" hidden>
+  ⚠️ <strong>Sample data</strong> — no CoinMarketCap API key is configured, so the board is running on bundled
+  sample API responses. Set <code>CMC_API_KEY</code> and restart for live data. Nothing on this page is a live price.
+</div>
+<div id="fallback-banner" class="sample-banner warn" hidden>
+  ⚠️ <strong>Live API unreachable</strong> — showing bundled sample data as a fallback. Figures below are NOT live.
+</div>
+
+<main>
+  <section class="cards" id="global-cards"></section>
+
+  <section class="mood-panel">
+    <div class="mood-head">
+      <h2>Market Mood</h2>
+      <div class="mood-score"><span id="mood-index">–</span><span class="mood-max">/100</span></div>
+      <div id="mood-label" class="mood-label">–</div>
+    </div>
+    <div class="mood-bar"><div id="mood-fill"></div></div>
+    <p id="mood-explanation" class="explanation"></p>
+    <details>
+      <summary>How the mood index is built</summary>
+      <table id="mood-components" class="mini-table"></table>
+    </details>
+  </section>
+
+  <section>
+    <h2>Trending on CoinMarketCap</h2>
+    <div id="trending" class="trending"></div>
+  </section>
+
+  <section>
+    <h2>Top coins by market cap — signals</h2>
+    <p class="hint">Momentum score blends 1h / 24h / 7d / 30d price changes (50 = flat). Click a row for the full picture.</p>
+    <div class="table-wrap">
+      <table id="coins">
+        <thead>
+          <tr>
+            <th>#</th><th>Coin</th><th>Price</th><th>1h</th><th>24h</th><th>7d</th><th>30d</th>
+            <th>Momentum</th><th>Signal</th><th>Turnover</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="coin-detail" class="coin-detail" hidden>
+    <h2 id="detail-title"></h2>
+    <div id="detail-body"></div>
+  </section>
+</main>
+
+<footer>
+  <p>Built by <strong>Crypto Relic</strong> for <strong>Build with CMC: API Hackathon</strong> · Data: CoinMarketCap Pro API
+  (<code>/v1/cryptocurrency/listings/latest</code>, <code>/v1/global-metrics/quotes/latest</code>,
+  <code>/v2/cryptocurrency/quotes/latest</code>, <code>/v1/cryptocurrency/trending/latest</code>) ·
+  Signals are informational, not financial advice.</p>
+  <p id="generated-at" class="hint"></p>
+</footer>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
